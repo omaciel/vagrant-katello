@@ -7,14 +7,14 @@ setenforce 0
 service firewalld stop
 chkconfig firewalld off
 
-# Update system
-yum install -y net-tools vim-enhanced
-
 # Configure the katello nightly repos
 rpm -Uvh http://fedorapeople.org/groups/katello/releases/yum/nightly/Fedora/19/x86_64/katello-repos-latest.rpm
 
 # Installation of packages
 yum install -y katello-all
+
+# Add some useful packages
+yum install -y net-tools
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1011716
 yum update -y selinux-policy-targeted

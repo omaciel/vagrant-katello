@@ -5,13 +5,11 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "fedora18"
-  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/fedora-18-x64-vbox4210.box"
+  config.vm.box = "fedora-19"
+  config.vm.box_url = "https://dl.dropboxusercontent.com/u/86066173/fedora-19.box"
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  config.vm.network :public_network
+  config.vm.network :forwarded_port, guest: 80, host: 80, auto_correct: true
+  config.vm.network :forwarded_port, guest: 443, host: 443, auto_correct: true
 
   config.vm.provision :shell, :path => "bootstrap.sh"
 end
